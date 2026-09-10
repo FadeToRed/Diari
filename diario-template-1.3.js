@@ -13,7 +13,7 @@ function costruisciDiarioHTML(d) {
  var html = ''; 
 
  // Contenitore-scheda con la palette scelta 
- html += '<div class="scheda-pg-container ' + d.palette + ' diario-container" style="margin:0 auto;">'; 
+ html += '<div class="scheda-pg-container ' + d.palette + ' diario-container" style="margin:0 auto; height:600px">'; 
 
  // Intestazione (titolo del diario) 
  html += '<div class="scheda-nomecognome"><p align="center"><span class="container-nomecognome" style="margin-top:2px;">' + 
