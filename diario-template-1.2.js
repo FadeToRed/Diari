@@ -16,7 +16,7 @@ function costruisciDiarioHTML(d) {
  html += '<div class="scheda-pg-container ' + d.palette + ' diario-container" style="margin:0 auto;">'; 
 
  // Intestazione (titolo del diario) 
- html += '<div class="scheda-nomecognome"><p align="center"><span class="container-nomecognome">' + 
+ html += '<div class="scheda-nomecognome"><p align="center"><span class="container-nomecognome" style="margin-top:2px;">' + 
   '<span class="nomecognome">' + d.titolo + '</span></span></p></div>'; 
 
  // Barra di navigazione: un bottone per sezione 
@@ -29,7 +29,7 @@ function costruisciDiarioHTML(d) {
  // Slide: una .slide-pg per sezione, con la griglia di card 
  html += '<div class="scheda-slide">'; 
  for (var s = 0; s < d.slides.length; s++) { 
-  html += '<div class="slide-pg"><div class="competenze-grid" style="height:450px; max-height:450px;">'; 
+  html += '<div class="slide-pg"><div class="competenze-grid" style="height:430px; max-height:430px; margin:20px 10px 5px 5px !important; width:calc(100% - 15px) !important;">'; 
   var voci = d.slides[s].voci; 
   if (voci.length === 0) { 
    html += '<div class="competenza-card bloccata"><div class="competenza-bloccata-label"><i class="fa-solid fa-feather"></i> Nessuna voce in questa sezione</div></div>'; 
