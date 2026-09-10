@@ -276,8 +276,12 @@ function aggiungiSlide(nome) {
  div.style.cssText = 'background:#292354; border:1px solid #3B8686; border-radius:10px; padding:16px; margin-bottom:14px;'; 
  div.innerHTML = 
   '<table style="width:100%; border-collapse:collapse; table-layout:fixed; margin-bottom:8px;"><tr>' + 
-  '<td style="width:88%; padding-right:8px; vertical-align:bottom;">' + 
+  '<td style="width:76%; padding-right:8px; vertical-align:bottom;">' + 
   inputText('slide-nome-'+sid,'Nome sezione','Es. Quest', nome) + '</td>' + 
+  '<td style="width:12%; vertical-align:bottom; padding-bottom:14px; text-align:center;">' + 
+  '<button onclick="spostaSlide(\'slide-block-'+sid+'\',-1)" title="Sposta su" style="background:#0B486B; color:#8FBEBA; border:1px solid #3B8686; padding:6px 9px; border-radius:6px 6px 0 0; cursor:pointer; display:block; width:100%;"><i class="fa-solid fa-chevron-up"></i></button>' + 
+  '<button onclick="spostaSlide(\'slide-block-'+sid+'\',1)" title="Sposta giù" style="background:#0B486B; color:#8FBEBA; border:1px solid #3B8686; border-top:none; padding:6px 9px; border-radius:0 0 6px 6px; cursor:pointer; display:block; width:100%;"><i class="fa-solid fa-chevron-down"></i></button>' + 
+  '</td>' + 
   '<td style="width:12%; vertical-align:bottom; padding-bottom:14px; text-align:center;">' + 
   '<button onclick="rimuoviSlide(\'slide-block-'+sid+'\')" title="Elimina sezione" style="background:rgba(80,0,0,0.4); color:#F9C6C6; border:1px solid #6b0b0b; padding:10px 12px; border-radius:6px; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>' + 
   '</td></tr></table>' + 
@@ -286,6 +290,20 @@ function aggiungiSlide(nome) {
  lista.appendChild(div); 
  aggiornaBottoneSlide(); 
  return sid; 
+} 
+
+// Sposta una sezione su (dir=-1) o giù (dir=+1) nell'elenco 
+function spostaSlide(blockId, dir) { 
+ var el = document.getElementById(blockId); 
+ if (!el) return; 
+ var lista = el.parentNode; 
+ if (dir < 0) { 
+  var prev = el.previousElementSibling; 
+  if (prev) lista.insertBefore(el, prev); 
+ } else { 
+  var next = el.nextElementSibling; 
+  if (next) lista.insertBefore(next, el); 
+ } 
 } 
 
 function rimuoviSlide(blockId) { 
