@@ -461,11 +461,29 @@ function copiaHTML() {
 // ============================================================ 
 // IMPORT (modalità modifica) 
 // ============================================================ 
+// ForumFree converte i tag <a> postati in BBCode [URL=...]testo[/URL]. 
+// Al ri-import li riconvertiamo in <a> così il parser DOM li legge. 
+// (I diari nuovi hanno <a style=""> e non vengono toccati da FF, restando <a>.) 
+function normalizzaBBCode(str) { 
+ if (!str) return str; 
+ // [URL=indirizzo]testo[/URL]  → <a style="" href="indirizzo">testo</a> 
+ str = str.replace(/\[url=([^\]]+)\]([\s\S]*?)\[\/url\]/gi, function(_m, href, testo) { 
+  return '<a style="" href="' + href.replace(/^["']|["']$/g, '') + '">' + testo + '</a>'; 
+ }); 
+ // [URL]indirizzo[/URL]  → <a style="" href="indirizzo">indirizzo</a> 
+ str = str.replace(/\[url\]([\s\S]*?)\[\/url\]/gi, function(_m, href) { 
+  var h = href.replace(/^["']|["']$/g, ''); 
+  return '<a style="" href="' + h + '">' + h + '</a>'; 
+ }); 
+ return str; 
+} 
+
 function importaDiario() { 
  var ta = document.getElementById('campo-import'); 
  if (!ta || !ta.value.trim()) { alert('Incolla prima il codice del diario.'); return; } 
+ var sorgente = normalizzaBBCode(ta.value); 
  var temp = document.createElement('div'); 
- temp['inn'+'erHTML'] = ta.value; 
+ temp['inn'+'erHTML'] = sorgente; 
 
  var dati = leggiDiarioDaDOM(temp); 
  if (!dati) { alert('Codice non riconosciuto. Assicurati di incollare un diario generato da questo strumento.'); return; } 
