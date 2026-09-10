@@ -54,7 +54,7 @@ function costruisciCardVoce(voce) {
  var nomeVis = voce.nome || 'Voce'; 
  var titoloHtml; 
  if (voce.url) { 
-  titoloHtml = '<a href="' + escAttr(voce.url) + '">' + escHtml(nomeVis) + '</a>'; 
+  titoloHtml = '<a style="" href="' + escAttr(voce.url) + '">' + escHtml(nomeVis) + '</a>'; 
  } else { 
   titoloHtml = escHtml(nomeVis); 
  } 
