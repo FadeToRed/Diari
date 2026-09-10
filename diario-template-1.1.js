@@ -29,7 +29,7 @@ function costruisciDiarioHTML(d) {
  // Slide: una .slide-pg per sezione, con la griglia di card 
  html += '<div class="scheda-slide">'; 
  for (var s = 0; s < d.slides.length; s++) { 
-  html += '<div class="slide-pg"><div class="competenze-grid">'; 
+  html += '<div class="slide-pg"><div class="competenze-grid" style="height:450px; max-height:450px;">'; 
   var voci = d.slides[s].voci; 
   if (voci.length === 0) { 
    html += '<div class="competenza-card bloccata"><div class="competenza-bloccata-label"><i class="fa-solid fa-feather"></i> Nessuna voce in questa sezione</div></div>'; 
