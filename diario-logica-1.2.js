@@ -343,8 +343,12 @@ function aggiungiVoce(sid, dati) {
  div.style.cssText = 'background:#0B486B; border:1px solid #3B8686; border-radius:8px; padding:12px; margin-bottom:10px;'; 
  div.innerHTML = 
   '<table style="width:100%; border-collapse:collapse; table-layout:fixed; margin-bottom:6px;"><tr>' + 
-  '<td style="width:50%; padding-right:6px; vertical-align:bottom;">' + inputText('voce-nome-'+vid,'Nome role','Es. Un incontro inatteso') + '</td>' + 
-  '<td style="width:38%; padding-left:6px; padding-right:6px; vertical-align:bottom;">' + inputText('voce-url-'+vid,'URL della role','https://...') + '</td>' + 
+  '<td style="width:44%; padding-right:6px; vertical-align:bottom;">' + inputText('voce-nome-'+vid,'Nome role','Es. Un incontro inatteso') + '</td>' + 
+  '<td style="width:32%; padding-left:6px; padding-right:6px; vertical-align:bottom;">' + inputText('voce-url-'+vid,'URL della role','https://...') + '</td>' + 
+  '<td style="width:12%; vertical-align:bottom; padding-bottom:14px; text-align:center;">' + 
+  '<button onclick="spostaVoce(\'voce-row-'+vid+'\',-1)" title="Sposta su" style="background:#292354; color:#8FBEBA; border:1px solid #3B8686; padding:5px 8px; border-radius:6px 6px 0 0; cursor:pointer; display:block; width:100%;"><i class="fa-solid fa-chevron-up"></i></button>' + 
+  '<button onclick="spostaVoce(\'voce-row-'+vid+'\',1)" title="Sposta giù" style="background:#292354; color:#8FBEBA; border:1px solid #3B8686; border-top:none; padding:5px 8px; border-radius:0 0 6px 6px; cursor:pointer; display:block; width:100%;"><i class="fa-solid fa-chevron-down"></i></button>' + 
+  '</td>' + 
   '<td style="width:12%; vertical-align:bottom; padding-bottom:14px; text-align:center;">' + 
   '<button onclick="rimuoviElemento(\'voce-row-'+vid+'\')" title="Elimina voce" style="background:rgba(80,0,0,0.4); color:#F9C6C6; border:1px solid #6b0b0b; padding:10px 12px; border-radius:6px; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>' + 
   '</td></tr></table>' + 
@@ -360,6 +364,20 @@ function aggiungiVoce(sid, dati) {
   setTextarea('voce-note-'+vid, dati.note || ''); 
  } 
  return vid; 
+} 
+
+// Sposta una voce su (dir=-1) o giù (dir=+1) dentro la sua sezione 
+function spostaVoce(rowId, dir) { 
+ var el = document.getElementById(rowId); 
+ if (!el) return; 
+ var lista = el.parentNode; 
+ if (dir < 0) { 
+  var prev = el.previousElementSibling; 
+  if (prev) lista.insertBefore(el, prev); 
+ } else { 
+  var next = el.nextElementSibling; 
+  if (next) lista.insertBefore(next, el); 
+ } 
 } 
 
 function rimuoviElemento(id) { 
